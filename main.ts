@@ -49,13 +49,13 @@ namespace TestMotion {
     export function driveDistance(distance: number) {
 
     }
-    //% block"Robotor anhalten"
+    //% block="Robotor anhalten"
     //% group="Fahren"
     export function stopMotor() {
 
     }
 
-    //% block"Für 1000 ms fahren"
+    //% block="Für 1000 ms fahren"
     //% group="Fahren"
     export function driveTime() {
         // Motor starten
