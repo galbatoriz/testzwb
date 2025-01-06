@@ -160,4 +160,26 @@ namespace TestMotion {
     export function setAngularVelocity(degrees: number) {
         angularVelocity = degrees / 500; //unit: degree/ms
     }
+
+    //% blockId=id+"driveFor1000Ms"
+    //% block="für 1s fahren"
+    //% group="Konfiguration"
+    export function driveFor1000Ms() {
+        writeData([0x00, 0, 200]);
+        writeData([0x02, 0, 200]);
+        basic.pause(1000);
+        writeData([0x00, 0, 0]);
+        writeData([0x02, 0, 0]);
+    }
+
+    //% blockId=id+"turnFor500ms"
+    //% block="für 500ms fahren"
+    //% group="Konfiguration"
+    export function turnFor500ms() {
+        writeData([0x00, 0, tuningSpeed]);
+        writeData([0x02, 1, tuningSpeed]);
+        basic.pause(500);
+        writeData([0x00, 0, 0]);
+        writeData([0x02, 0, 0]);
+    }
 }
