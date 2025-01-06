@@ -1,3 +1,9 @@
+/**
+ * Extension for MotionKitV2
+ */
+
+//% color="#AA278D"
+//% groups="['Fruits', 'Veggies']"
 namespace TestMotion {
     //% block
     export function helloWorld() {
