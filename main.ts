@@ -3,27 +3,45 @@
  */
 
 //% color="#AA278D"
-//% groups="['Fruits', 'Veggies']"
+//% groups="['Drehen', 'Fahren']"
 namespace TestMotion {
     //% block
-    export function helloWorld() {
+    //% group="Drehen"
+    export function turnLeft90() {
+    //% block
+    //% group="Drehen"
+    }
+    export function turnRight90() {
+    //% block
+    //% group="Drehen"
+    }
+    //% block
+    //% group="Drehen"
+    export function turnDegrees() {
+
+    }
+    //% block
+    //% group="Fahren"
+    export function driveForward() {
+    //% block
+    //% group="Fahren"
+    }
+    export function driveBackward() {
+    //% block
+    //% group="Fahren"
+    }
+    export function driveDistance() {
+    //% block
+    //% group="Fahren"
+    }
+    export function driveTime() {
 
     }
 
     // note that Caml casing yields lower case
     // block text with spaces
 
-    //% block
-    export function camlCaseTwo() {
 
-    }
-    /**
- * This block goes to the bottom
- */
-    //% block
-    //% weight=50
-    export function second() {
-    }
 
     /**
      * This block goes on top
