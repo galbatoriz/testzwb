@@ -1,25 +1,27 @@
 /**
  * Extension for MotionKitV2
  */
-export enum MotorSelection {
-    //% blockId="maqueen_MotorLeft" block="links"
-    M1 = 0,
-    //% blockId="maqueen_MotorRight" block="rechts"
-    M2 = 1,
-    //% blockId="maqueen_MotorAll" block="beide"
-    All = 2
-}
-
-export enum Dir {
-    //% blockId="maqueen_DirCW" block="vorwärts"
-    CW = 0,
-    //% blockId="maqueen_DirCCW" block="rückwärts"
-    CCW = 1
-}
 
 //% color="#AA278D"
 //% groups="['Drehen', 'Fahren', 'Konfiguration', 'Steuerung']"
 namespace TestMotion {
+
+    export enum MotorSelection {
+        //% block="links"
+        M1 = 0,
+        //% lock="rechts"
+        M2 = 1,
+        //% block="beide"
+        All = 2
+    }
+
+    export enum Dir {
+        //% block="vorwärts"
+        CW = 0,
+        //% block="rückwärts"
+        CCW = 1
+    }
+
 
     //% group="Drehen"
     //% block="90 Grad nach Links drehen"
@@ -58,12 +60,12 @@ namespace TestMotion {
 
     }
 
-    //% block="Mit Motor|%index|Richtung|%direction|Tempo|%speed fahren"
+    //% block="Mit Motor|%motor|Richtung|%direction|Tempo|%speed fahren"
     //% motor.fieldEditor="gridpicker" index.fieldOptions.columns=2
     //% direction.fieldEditor="gridpicker" direction.fieldOptions.columns=2
     //% speed.min=0 speed.max=255 speed.defl=200
     //% group="Steuerung"
-    export function motorRun(motor: MotorSelection, direction: Dir, speed: number): void {
+    export function motorRun(motor: MotorSelection, direction: Dir, speed: number) {
 
     }
 
