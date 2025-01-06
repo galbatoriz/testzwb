@@ -37,7 +37,7 @@ namespace TestMotion {
         writeData([0x02, 0, 0]);
     }
 
-
+    //% blockId=id+"turnDegrees"
     //% group="Drehen"
     //% block="um $degrees Grad drehen"
     export function turnDegrees(degrees: number) {
@@ -106,6 +106,7 @@ namespace TestMotion {
         writeData([0x02, 0, 0]);
     }
 
+    //% blockId=id+"setDistance"
     //% block
     //% group="Konfiguration"
     export function setDistance() {
