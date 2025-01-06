@@ -47,9 +47,11 @@ namespace TestMotion {
 
     //% block="Für $time ms|%direction|fahren"
     //% group="Fahren"
-    //% direction.fieldEditor = "gridpicker" direction.fieldOptions.columns = 2
+    //% direction.fieldEditor="gridpicker"
+    //% direction.fieldOptions.width=220
+    //% direction.fieldOptions.columns=3
     export function driveTime(time: number, direction: Dir) {
-        
+
         control.inBackground(function () {
             writeData([0x00, direction, 200]);
             writeData([0x02, direction, 200]);
@@ -59,7 +61,7 @@ namespace TestMotion {
         })
         // Motor starten
         //writeData([0x00, direction, speed]);
-        
+
     }
 
 
