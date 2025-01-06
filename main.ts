@@ -1,9 +1,10 @@
-//% color="#ff0000" icon="\uf0a4"
+//% color="#abbf3c" icon="\uf0d1"
+//% weight=100
 //% groups="['Drehen', 'Fahren', 'Konfiguration', 'Erweiterte Steuerung']"
 namespace TestMotion {
     const IICADRRESS = 0x10;
-    const id = "245rtzf0006011359";
-    let timeIntoDistanceFactor = 200; //1000ms = x cm
+    const id = "245rtzf000601-1412";
+    let timeIntoDistanceFactor = 200;
     export enum Dir {
         //% block="vorwärts"
         CW = 0,
