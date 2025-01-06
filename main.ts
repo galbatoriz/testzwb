@@ -2,7 +2,7 @@
 //% groups="['Drehen', 'Fahren', 'Konfiguration', 'Steuerung']"
 namespace TestMotion {
     const IICADRRESS = 0x10;
-    const id = "zwb00010";
+    const id = "zwb00014";
     export enum Dir {
         //% block="vorwärts"
         CW = 0,
@@ -46,6 +46,9 @@ namespace TestMotion {
 
     }
 
+    let motorRunningTime = 0; // Gesamtzeit, die der Motor laufen soll
+    let isMotorRunning = false; // Ob der Motor aktuell läuft
+    
     //% blockId=id+"driveTime"
     //% block="Für $time ms|%direction|fahren"
     //% group="Fahren"
@@ -53,17 +56,36 @@ namespace TestMotion {
     //% direction.fieldEditor="gridpicker"
     //% direction.fieldOptions.width=220
     //% direction.fieldOptions.columns=3
-    export function driveTime(time: number, direction: Dir) {
+    export function driveTime(time: number, direction: Dir) { {
+        motorRunningTime += duration; // Füge die gewünschte Laufzeit hinzu
 
-        control.inBackground(function () {
-            writeData([0x00, direction, 200]);
-            writeData([0x02, direction, 200]);
-            basic.pause(time)
-            writeData([0x00, 0, 0]);
-            writeData([0x02, 0, 0]);
-        })
-        // Motor starten
-        //writeData([0x00, direction, speed]);
+        if (!isMotorRunning) {
+            control.inBackground(function () {
+                isMotorRunning = true;
+
+                while (motorRunningTime > 0) {
+                    // Motor einschalten
+                    writeData([0x00, direction, 200]);
+                    writeData([0x02, direction, 200]);
+
+                    // Warte für 100ms und verringere die verbleibende Laufzeit
+                    basic.pause(50);
+                    motorRunningTime -= 50;
+
+                    if (motorRunningTime < 0) {
+                        motorRunningTime = 0; // Sicherheitsmaßnahme
+                    }
+                }
+
+                // Motor ausschalten
+                writeData([0x00, 0, 0]);
+                writeData([0x02, 0, 0]);
+                isMotorRunning = false;
+            });
+        }
+
+  
+    
 
     }
 
