@@ -1,5 +1,5 @@
 //% color="#ff0000" icon="\uf0a4"
-//% groups="['Drehen', 'Fahren', 'Konfiguration', 'Steuerung']"
+//% groups="['Drehen', 'Fahren', 'Konfiguration', 'Erweiterte Steuerung']"
 namespace TestMotion {
     const IICADRRESS = 0x10;
     const id = "zwb00016";
@@ -34,21 +34,41 @@ namespace TestMotion {
     export function turnDegrees(degrees: number) {
 
     }
-
+    
+    //% blockId=id+"driveDistance"
     //% block="Für $distance cm fahren"
     //% group="Fahren"
+    //% time.defl=10
     export function driveDistance(distance: number) {
 
     }
+    //% blockId=id+"stopMotor"
     //% block="Robotor anhalten"
     //% group="Fahren"
     export function stopMotor() {
-
+        writeData([0x00, 0, 0]);
+        writeData([0x02, 0, 0]);
     }
 
-    let motorRunningTime = 0; // Gesamtzeit, die der Motor laufen soll
-    let isMotorRunning = false; // Ob der Motor aktuell läuft
-    
+    //% blockId=id+"driveTimeNonBlocking"
+    //% block="Für $time ms|%direction|fahren, dabei das Programm weiter laufen lassen"
+    //% group="Erweiterte Steuerung"
+    //% time.defl=1000
+    //% direction.fieldEditor="gridpicker"
+    //% direction.fieldOptions.width=220
+    //% direction.fieldOptions.columns=3
+    export function driveTimeNonBlocking(time: number, direction: Dir) {
+
+        control.inBackground(function () {
+            writeData([0x00, direction, 200]);
+            writeData([0x02, direction, 200]);
+            basic.pause(time)
+            writeData([0x00, 0, 0]);
+            writeData([0x02, 0, 0]);
+        })
+    }
+
+
     //% blockId=id+"driveTime"
     //% block="Für $time ms|%direction|fahren"
     //% group="Fahren"
@@ -57,39 +77,12 @@ namespace TestMotion {
     //% direction.fieldOptions.width=220
     //% direction.fieldOptions.columns=3
     export function driveTime(time: number, direction: Dir) {
-        motorRunningTime += time; // Füge die gewünschte Laufzeit hinzu
-
-        if (!isMotorRunning) {
-            control.inBackground(function () {
-                isMotorRunning = true;
-
-                while (motorRunningTime > 0) {
-                    // Motor einschalten
-                    writeData([0x00, direction, 200]);
-                    writeData([0x02, direction, 200]);
-
-                    // Warte für 100ms und verringere die verbleibende Laufzeit
-                    basic.pause(50);
-                    motorRunningTime -= 50;
-
-                    if (motorRunningTime < 0) {
-                        motorRunningTime = 0; // Sicherheitsmaßnahme
-                    }
-                }
-
-                // Motor ausschalten
-                writeData([0x00, 0, 0]);
-                writeData([0x02, 0, 0]);
-                isMotorRunning = false;
-            });
-        }
-
-  
-    
-
+        writeData([0x00, direction, 200]);
+        writeData([0x02, direction, 200]);
+        basic.pause(time)
+        writeData([0x00, 0, 0]);
+        writeData([0x02, 0, 0]);
     }
-
-
 
     //% block
     //% group="Konfiguration"
