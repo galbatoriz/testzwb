@@ -9,7 +9,7 @@ namespace TestMotion {
     export enum MotorSelection {
         //% block="links"
         M1 = 0,
-        //% lock="rechts"
+        //% block="rechts"
         M2 = 1,
         //% block="beide"
         All = 2
