@@ -6,6 +6,7 @@ namespace TestMotion {
     const id = "245rtzf000601-1512";
     let velocity = 0.26; //unit: mm/ms
     let angularVelocity = 360/700; //unit: degree/ms
+    let tuningSpeed = 150;
     export enum Dir {
         //% block="vorwärts"
         CW = 0,
@@ -21,9 +22,10 @@ namespace TestMotion {
     //% group="Drehen"
     //% block="90 Grad nach Links drehen"
     export function turnLeft90() {
-        writeData([0x00, 0, 200]);
-        writeData([0x02, 1, 200]);
-        basic.pause(100);
+        let wait = 90 / angularVelocity;
+        writeData([0x00, 1, tuningSpeed]);
+        writeData([0x02, 0, tuningSpeed]);
+        basic.pause(wait);
         writeData([0x00, 0, 0]);
         writeData([0x02, 0, 0]);
     }
@@ -32,9 +34,10 @@ namespace TestMotion {
     //% group="Drehen"
     //% block="90 Grad nach Rechts drehen"
     export function turnRight90() {
-        writeData([0x00, 1, 200]);
-        writeData([0x02, 0, 200]);
-        basic.pause(100);
+        let wait = 90 / angularVelocity;
+        writeData([0x00, 0, tuningSpeed]);
+        writeData([0x02, 1, tuningSpeed]);
+        basic.pause(wait);
         writeData([0x00, 0, 0]);
         writeData([0x02, 0, 0]);
     }
@@ -44,8 +47,8 @@ namespace TestMotion {
     //% block="um $degrees Grad drehen"
     export function turnDegrees(degrees: number) {
         let wait = degrees/angularVelocity;
-        writeData([0x00, 1, 200]);
-        writeData([0x02, 0, 200]);
+        writeData([0x00, 1, tuningSpeed]);
+        writeData([0x02, 0, tuningSpeed]);
         basic.pause(wait);
         writeData([0x00, 0, 0]);
         writeData([0x02, 0, 0]);
