@@ -57,8 +57,19 @@ namespace TestMotion {
 
     //% block"Für $time ms fahren"
     //% group="Fahren"
-    export function driveTime() {
 
+
+    export function driveTime(time: number) {
+        // Motor starten
+        //writeData([0x00, direction, speed]);
+        writeData([0x00, 0, 200]);
+        writeData([0x02, 0, 200]);
+
+        // Nach 1 Sekunde den Motor ausschalten
+        setTimeout(() => {
+            writeData([0x00, 0, 0]);
+            writeData([0x02, 0, 0]);
+        }, 1000);
     }
 
 
