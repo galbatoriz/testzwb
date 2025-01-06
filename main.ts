@@ -2,8 +2,8 @@
 //% groups="['Drehen', 'Fahren', 'Konfiguration', 'Erweiterte Steuerung']"
 namespace TestMotion {
     const IICADRRESS = 0x10;
-    const id = "zwb00018";
-    
+    const id = "245rtzf";
+    let timeIntoDistanceFactor = 200; //1000ms = x cm
     export enum Dir {
         //% block="vorwärts"
         CW = 0,
@@ -43,14 +43,7 @@ namespace TestMotion {
     export function turnDegrees(degrees: number) {
 
     }
-    
-    //% blockId=id+"driveDistance"
-    //% block="Für $distance cm fahren"
-    //% group="Fahren"
-    //% time.defl=10
-    export function driveDistance(distance: number) {
 
-    }
     //% blockId=id+"stopMotor"
     //% block="Robotor anhalten"
     //% group="Fahren"
@@ -58,6 +51,7 @@ namespace TestMotion {
         writeData([0x00, 0, 0]);
         writeData([0x02, 0, 0]);
     }
+
 
     //% blockId=id+"driveTimeNonBlocking"
     //% block="Für $time ms|%direction|fahren, dabei das Programm weiter laufen lassen"
@@ -67,7 +61,6 @@ namespace TestMotion {
     //% direction.fieldOptions.width=220
     //% direction.fieldOptions.columns=3
     export function driveTimeNonBlocking(time: number, direction: Dir) {
-
         control.inBackground(function () {
             writeData([0x00, direction, 200]);
             writeData([0x02, direction, 200]);
@@ -77,19 +70,39 @@ namespace TestMotion {
         })
     }
 
-    //% blockId=id+"driveNonBlocking"
-    //% block="Für immer |%direction|fahren"
+
+    //% blockId=id+"driveNonBlockingForeverLeftSpeed"
+    //% block="Für immer |%direction|mit $speed Links fahren"
     //% group="Erweiterte Steuerung"
-    //% time.defl=1000
     //% direction.fieldEditor="gridpicker"
     //% direction.fieldOptions.width=220
     //% direction.fieldOptions.columns=3
-    export function driveNonBlocking(time: number, direction: Dir) {
-        writeData([0x00, direction, 200]);
-        writeData([0x02, direction, 200]);
-        
+    export function driveNonBlockingForeverLeftSpeed(direction: Dir, speed: number) {
+        writeData([0x00, direction, speed]);
     }
 
+    //% blockId=id+"driveNonBlockingForeverRightSpeed"
+    //% block="Für immer |%direction|mit $speed Rechts fahren"
+    //% group="Erweiterte Steuerung"
+    //% direction.fieldEditor="gridpicker"
+    //% direction.fieldOptions.width=220
+    //% direction.fieldOptions.columns=3
+    export function driveNonBlockingForeverRightSpeed(direction: Dir, speed: number) {
+        writeData([0x02, direction, speed]);
+
+    }
+
+    //% blockId=id+"driveNonBlockingForever"
+    //% block="Für immer |%direction|mit $speed fahren"
+    //% group="Erweiterte Steuerung"
+    //% direction.fieldEditor="gridpicker"
+    //% direction.fieldOptions.width=220
+    //% direction.fieldOptions.columns=3
+    export function driveNonBlockingForever(direction: Dir, speed: number) {
+        writeData([0x00, direction, speed]);
+        writeData([0x02, direction, speed]);
+
+    }
 
     //% blockId=id+"driveTime"
     //% block="Für $time ms|%direction|fahren"
@@ -106,12 +119,18 @@ namespace TestMotion {
         writeData([0x02, 0, 0]);
     }
 
+    //% blockId=id+"driveDistance"
+    //% block="Für $distance cm fahren"
+    //% group="Fahren"
+    //% distance.defl=10
+    export function driveDistance(distance: number) {
+
+    }
+
     //% blockId=id+"setDistance"
     //% block
     //% group="Konfiguration"
     export function setDistance() {
 
     }
-
-
 }
