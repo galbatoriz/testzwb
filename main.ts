@@ -3,8 +3,9 @@
 //% groups="['Drehen', 'Fahren', 'Konfiguration', 'Erweiterte Steuerung']"
 namespace TestMotion {
     const IICADRRESS = 0x10;
-    const id = "245rtzf000601-1412";
-    let timeIntoDistanceFactor = 200;
+    const id = "245rtzf000601-1512";
+    let velocity = 0.26; //unit: mm/ms
+    let angularVelocity = 360/700; //unit: degree/ms
     export enum Dir {
         //% block="vorwärts"
         CW = 0,
@@ -22,7 +23,7 @@ namespace TestMotion {
     export function turnLeft90() {
         writeData([0x00, 0, 200]);
         writeData([0x02, 1, 200]);
-        basic.pause(500)
+        basic.pause(100);
         writeData([0x00, 0, 0]);
         writeData([0x02, 0, 0]);
     }
@@ -33,7 +34,7 @@ namespace TestMotion {
     export function turnRight90() {
         writeData([0x00, 1, 200]);
         writeData([0x02, 0, 200]);
-        basic.pause(500)
+        basic.pause(100);
         writeData([0x00, 0, 0]);
         writeData([0x02, 0, 0]);
     }
@@ -42,7 +43,12 @@ namespace TestMotion {
     //% group="Drehen"
     //% block="um $degrees Grad drehen"
     export function turnDegrees(degrees: number) {
-
+        let wait = degrees/angularVelocity;
+        writeData([0x00, 1, 200]);
+        writeData([0x02, 0, 200]);
+        basic.pause(wait);
+        writeData([0x00, 0, 0]);
+        writeData([0x02, 0, 0]);
     }
 
     //% blockId=id+"stopMotor"
@@ -65,7 +71,7 @@ namespace TestMotion {
         control.inBackground(function () {
             writeData([0x00, direction, 200]);
             writeData([0x02, direction, 200]);
-            basic.pause(time)
+            basic.pause(time);
             writeData([0x00, 0, 0]);
             writeData([0x02, 0, 0]);
         })
@@ -115,7 +121,7 @@ namespace TestMotion {
     export function driveTime(time: number, direction: Dir) {
         writeData([0x00, direction, 200]);
         writeData([0x02, direction, 200]);
-        basic.pause(time)
+        basic.pause(time);
         writeData([0x00, 0, 0]);
         writeData([0x02, 0, 0]);
     }
@@ -125,13 +131,30 @@ namespace TestMotion {
     //% group="Fahren"
     //% distance.defl=10
     export function driveDistance(distance: number) {
-
+        let direction = 0;
+        if(distance < 0) {
+            direction = 1;
+            distance = distance*(-1);
+        }
+        let wait = distance/velocity;
+        writeData([0x00, direction, 200]);
+        writeData([0x02, direction, 200]);
+        basic.pause(wait)
+        writeData([0x00, 0, 0]);
+        writeData([0x02, 0, 0]);
     }
 
-    //% blockId=id+"setDistance"
-    //% block
+    //% blockId=id+"setVelocity"
+    //% block="1s sind $distance cm"
     //% group="Konfiguration"
-    export function setDistance() {
+    export function setVelocity(distance: number) {
+        velocity = distance/100; // unit: mm/ms
+    }
 
+    //% blockId=id+"setAngularVelocity"
+    //% block="500ms sind $degrees Grad"
+    //% group="Konfiguration"
+    export function setAngularVelocity(degrees: number) {
+        angularVelocity = degrees / 500; //unit: degree/ms
     }
 }
