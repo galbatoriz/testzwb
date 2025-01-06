@@ -47,6 +47,7 @@ namespace TestMotion {
 
     //% block="Für $time ms|%direction|fahren"
     //% group="Fahren"
+    //% time.defl=1000
     //% direction.fieldEditor="gridpicker"
     //% direction.fieldOptions.width=220
     //% direction.fieldOptions.columns=3
