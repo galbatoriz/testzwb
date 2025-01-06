@@ -2,7 +2,7 @@
 //% groups="['Drehen', 'Fahren', 'Konfiguration', 'Steuerung']"
 namespace TestMotion {
     const IICADRRESS = 0x10;
-    const id = "zwb00014";
+    const id = "zwb00016";
     export enum Dir {
         //% block="vorwärts"
         CW = 0,
@@ -56,8 +56,8 @@ namespace TestMotion {
     //% direction.fieldEditor="gridpicker"
     //% direction.fieldOptions.width=220
     //% direction.fieldOptions.columns=3
-    export function driveTime(time: number, direction: Dir) { {
-        motorRunningTime += duration; // Füge die gewünschte Laufzeit hinzu
+    export function driveTime(time: number, direction: Dir) {
+        motorRunningTime += time; // Füge die gewünschte Laufzeit hinzu
 
         if (!isMotorRunning) {
             control.inBackground(function () {
