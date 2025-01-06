@@ -2,7 +2,7 @@
 //% groups="['Drehen', 'Fahren', 'Konfiguration', 'Erweiterte Steuerung']"
 namespace TestMotion {
     const IICADRRESS = 0x10;
-    const id = "245rtzf";
+    const id = "245rtzf0006011359";
     let timeIntoDistanceFactor = 200; //1000ms = x cm
     export enum Dir {
         //% block="vorwärts"
