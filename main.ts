@@ -2,7 +2,8 @@
 //% groups="['Drehen', 'Fahren', 'Konfiguration', 'Erweiterte Steuerung']"
 namespace TestMotion {
     const IICADRRESS = 0x10;
-    const id = "zwb00016";
+    const id = "zwb00018";
+    
     export enum Dir {
         //% block="vorwärts"
         CW = 0,
@@ -14,18 +15,26 @@ namespace TestMotion {
         pins.i2cWriteBuffer(IICADRRESS, pins.createBufferFromArray(buf));
     }
 
-
+    //% blockId=id+"turnLeft90"
     //% group="Drehen"
     //% block="90 Grad nach Links drehen"
     export function turnLeft90() {
-
+        writeData([0x00, 0, 200]);
+        writeData([0x02, 1, 200]);
+        basic.pause(500)
+        writeData([0x00, 0, 0]);
+        writeData([0x02, 0, 0]);
     }
 
-
+    //% blockId=id+"turnRight90"
     //% group="Drehen"
     //% block="90 Grad nach Rechts drehen"
     export function turnRight90() {
-
+        writeData([0x00, 1, 200]);
+        writeData([0x02, 0, 200]);
+        basic.pause(500)
+        writeData([0x00, 0, 0]);
+        writeData([0x02, 0, 0]);
     }
 
 
@@ -66,6 +75,19 @@ namespace TestMotion {
             writeData([0x00, 0, 0]);
             writeData([0x02, 0, 0]);
         })
+    }
+
+    //% blockId=id+"driveNonBlocking"
+    //% block="Für immer |%direction|fahren"
+    //% group="Erweiterte Steuerung"
+    //% time.defl=1000
+    //% direction.fieldEditor="gridpicker"
+    //% direction.fieldOptions.width=220
+    //% direction.fieldOptions.columns=3
+    export function driveNonBlocking(time: number, direction: Dir) {
+        writeData([0x00, direction, 200]);
+        writeData([0x02, direction, 200]);
+        
     }
 
 
