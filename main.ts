@@ -1,27 +1,9 @@
-/**
- * Extension for MotionKitV2
- */
-export enum MotorSelection {
-    //% block="links"
-    M1 = 0,
-    //% block="rechts"
-    M2 = 1,
-    //% block="beide"
-    All = 2
-}
-
-export enum Dir {
-    //% block="vorwärts"
-    CW = 0,
-    //% block="rückwärts"
-    CCW = 1
-}
-
-//% color="#ff0000" icon="\uf0a4"
-//% groups="['Drehen', 'Fahren', 'Konfiguration', 'Steuerung']"
 namespace TestMotion {
+    const IICADRRESS = 0x10;
 
-
+    function writeData(buf: number[]): void {
+        pins.i2cWriteBuffer(IICADRRESS, pins.createBufferFromArray(buf));
+    }
 
 
     //% group="Drehen"
@@ -58,16 +40,17 @@ namespace TestMotion {
     //% block="Für 1000 ms fahren"
     //% group="Fahren"
     export function driveTime() {
-        // Motor starten
-        //writeData([0x00, direction, speed]);
-        writeData([0x00, 0, 200]);
-        writeData([0x02, 0, 200]);
-
-        // Nach 1 Sekunde den Motor ausschalten
-        setTimeout(() => {
+        
+        control.inBackground(function () {
+            writeData([0x00, 0, 200]);
+            writeData([0x02, 0, 200]);
+            basic.pause(1000)
             writeData([0x00, 0, 0]);
             writeData([0x02, 0, 0]);
-        }, 1000);
+        })
+        // Motor starten
+        //writeData([0x00, direction, speed]);
+        
     }
 
 

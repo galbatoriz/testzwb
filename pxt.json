@@ -4,7 +4,8 @@
     "description": "",
     "dependencies": {
         "core": "*",
-        "v1": "*"
+        "v1": "*",
+        "MotionKit V2": "github:tinysuperlab/motionkitv2#71deb206e573bef6d45615cb04ef7587c6e68820"
     },
     "files": [
         "main.blocks",
