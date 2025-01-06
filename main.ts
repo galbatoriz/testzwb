@@ -1,26 +1,28 @@
 /**
  * Extension for MotionKitV2
  */
+export enum MotorSelection {
+    //% block="links"
+    M1 = 0,
+    //% block="rechts"
+    M2 = 1,
+    //% block="beide"
+    All = 2
+}
+
+export enum Dir {
+    //% block="vorwärts"
+    CW = 0,
+    //% block="rückwärts"
+    CCW = 1
+}
+
 
 //% color="#AA278D"
 //% groups="['Drehen', 'Fahren', 'Konfiguration', 'Steuerung']"
 namespace TestMotion {
 
-    export enum MotorSelection {
-        //% block="links"
-        M1 = 0,
-        //% block="rechts"
-        M2 = 1,
-        //% block="beide"
-        All = 2
-    }
 
-    export enum Dir {
-        //% block="vorwärts"
-        CW = 0,
-        //% block="rückwärts"
-        CCW = 1
-    }
 
 
     //% group="Drehen"
