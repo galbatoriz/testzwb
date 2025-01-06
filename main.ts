@@ -2,6 +2,7 @@
 //% groups="['Drehen', 'Fahren', 'Konfiguration', 'Steuerung']"
 namespace TestMotion {
     const IICADRRESS = 0x10;
+    const id = "zwb00010";
     export enum Dir {
         //% block="vorwärts"
         CW = 0,
@@ -45,6 +46,7 @@ namespace TestMotion {
 
     }
 
+    //% blockId=id+"driveTime"
     //% block="Für $time ms|%direction|fahren"
     //% group="Fahren"
     //% time.defl=1000
