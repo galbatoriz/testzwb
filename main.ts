@@ -61,14 +61,7 @@ namespace TestMotion {
 
     }
 
-    //% block="Mit Motor|%motor|Richtung|%direction|Tempo|%speed fahren"
-    //% motor.fieldEditor="gridpicker" index.fieldOptions.columns=2
-    //% direction.fieldEditor="gridpicker" direction.fieldOptions.columns=2
-    //% speed.min=0 speed.max=255 speed.defl=200
-    //% group="Steuerung"
-    export function motorRun(motor: MotorSelection, direction: Dir, speed: number) {
 
-    }
 
     //% block
     //% group="Konfiguration"
