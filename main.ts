@@ -17,8 +17,7 @@ export enum Dir {
     CCW = 1
 }
 
-
-//% color="#AA278D"
+//% color="#ff0000" icon="\uf0a4"
 //% groups="['Drehen', 'Fahren', 'Konfiguration', 'Steuerung']"
 namespace TestMotion {
 
