@@ -1,6 +1,3 @@
-//% color="#abbf3c" icon="\uf0d1"
-//% weight=100
-//% groups="['Drehen', 'Fahren', 'Konfiguration', 'Erweiterte Steuerung']"
 namespace TestMotion {
     const IICADRRESS = 0x10;
     const id = "245rtzf000601-1512";
@@ -34,10 +31,10 @@ namespace TestMotion {
     //% group="Drehen"
     //% block="90 Grad nach Rechts drehen"
     export function turnRight90() {
-        let wait = 90 / angularVelocity;
+        let wait2 = 90 / angularVelocity;
         writeData([0x00, 0, tuningSpeed]);
         writeData([0x02, 1, tuningSpeed]);
-        basic.pause(wait);
+        basic.pause(wait2);
         writeData([0x00, 0, 0]);
         writeData([0x02, 0, 0]);
     }
@@ -46,10 +43,10 @@ namespace TestMotion {
     //% group="Drehen"
     //% block="um $degrees Grad drehen"
     export function turnDegrees(degrees: number) {
-        let wait = degrees/angularVelocity;
+        let wait3 = degrees/angularVelocity;
         writeData([0x00, 1, tuningSpeed]);
         writeData([0x02, 0, tuningSpeed]);
-        basic.pause(wait);
+        basic.pause(wait3);
         writeData([0x00, 0, 0]);
         writeData([0x02, 0, 0]);
     }
@@ -139,10 +136,10 @@ namespace TestMotion {
             direction = 1;
             distance = distance*(-1);
         }
-        let wait = distance/velocity;
+        let wait4 = (distance/velocity)*10;
         writeData([0x00, direction, 200]);
         writeData([0x02, direction, 200]);
-        basic.pause(wait)
+        basic.pause(wait4)
         writeData([0x00, 0, 0]);
         writeData([0x02, 0, 0]);
     }
