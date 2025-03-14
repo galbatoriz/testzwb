@@ -1,4 +1,4 @@
-namespace TestMotion {
+namespace EasyMotionKit {
     const IICADRRESS = 0x10;
     const id = "245rtzf000601-1512";
     let velocity = 0.26; //unit: mm/ms
